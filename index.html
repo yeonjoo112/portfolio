@@ -21,9 +21,9 @@
     .nav-links a { font-size:0.78rem; letter-spacing:0.14em; text-transform:uppercase; color:var(--mid); text-decoration:none; font-weight:500; transition:color 0.2s; }
     .nav-links a:hover { color:var(--indigo); }
 
-    .hero { min-height:100vh; display:grid; grid-template-rows:1fr auto; position:relative; overflow:hidden; background:linear-gradient(145deg,#C8EDF0 0%,#B8CCE8 40%,#C4B8E0 75%,#D4C8EE 100%); }
-    .orb1 { position:absolute; width:clamp(500px,72vw,1000px); height:clamp(500px,72vw,1000px); top:50%; left:50%; transform:translate(-15%,-52%); background:url('orb.png') center/contain no-repeat; animation:orbFloat 10s ease-in-out infinite; z-index:0; }
-    .orb2 { position:absolute; width:clamp(180px,26vw,360px); height:clamp(180px,26vw,360px); top:5%; right:4%; background:url('orb.png') center/contain no-repeat; opacity:0.5; animation:orbFloat 13s ease-in-out infinite reverse; z-index:0; }
+    .hero { min-height:100vh; display:grid; grid-template-rows:1fr auto; position:relative; overflow:hidden; background:linear-gradient(135deg, #D6F0F0 0%, #C8EAE8 35%, #C8C8E8 65%, #C4B8E0 85%, #D4C8EE 100%); }
+    .orb1 { position:absolute; width:clamp(500px,72vw,1000px); height:clamp(500px,72vw,1000px); top:50%; left:50%; transform:translate(-15%,-52%); background:url('orb.png') center/contain no-repeat; animation:orbFloat 10s ease-in-out infinite; z-index:0; mix-blend-mode:multiply; }
+    .orb2 { position:absolute; width:clamp(180px,26vw,360px); height:clamp(180px,26vw,360px); top:5%; right:4%; background:url('orb.png') center/contain no-repeat; opacity:0.5; animation:orbFloat 13s ease-in-out infinite reverse; z-index:0; mix-blend-mode:multiply; }
     .orb-ring { display:none; }
     @keyframes orbFloat { 0%,100%{transform:translate(-15%,-52%) translateY(0)} 50%{transform:translate(-15%,-52%) translateY(-28px)} }
 
