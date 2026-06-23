@@ -69,7 +69,8 @@
     .about-avatar { width:100%; background:linear-gradient(160deg,#C8EDF0 0%,#B8CCEC 40%,#A8A8D8 75%,#C0B0E0 100%); display:flex; align-items:center; justify-content:center; font-size:6rem; font-weight:900; color:rgba(255,255,255,0.25); position:relative; overflow:hidden; }
     .about-avatar-orb { position:absolute; width:75%; height:75%; background:url('orb.png') center/contain no-repeat; top:50%; left:50%; transform:translate(-50%,-50%); opacity:0.85; mix-blend-mode:multiply; }
     .about-avatar-name { position:absolute; bottom:2.5rem; left:2.5rem; font-size:0.82rem; font-weight:500; letter-spacing:0.18em; color:rgba(255,255,255,0.85); text-transform:uppercase; }
-    .about-text { padding:4rem 6vw 5rem 10vw; display:flex; flex-direction:column; justify-content:center; background:transparent; position:relative; }
+    .about-text { background:transparent; position:relative; padding:4rem 0 5rem; }
+    .about-inner { padding:0 6vw; }
     .about-orb-bg { position:absolute; width:clamp(260px,36vw,480px); height:clamp(260px,36vw,480px); bottom:0; left:-15%; transform:translateY(45%); background:url('orb.png') center/contain no-repeat; opacity:0.75; mix-blend-mode:multiply; pointer-events:none; z-index:0; animation:orb1Float 9s ease-in-out infinite; }
 
     /* info 블록 */
@@ -176,6 +177,7 @@
     <div class="about reveal">
       <div class="about-text">
         <div class="about-orb-bg"></div>
+        <div class="about-inner">
         <div class="about-info">
           <div class="about-info-item">
             <h5>Name</h5>
@@ -209,6 +211,7 @@
             </div>
           </div>
         </div>
+        </div><!-- about-inner -->
       </div>
     </div>
   </section>
