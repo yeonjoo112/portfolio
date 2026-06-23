@@ -15,7 +15,7 @@
     html { scroll-behavior: smooth; }
     body { background:var(--bg); color:var(--deep); font-family:'Pretendard',sans-serif; font-weight:400; line-height:1.6; overflow-x:hidden; }
 
-    nav { position:fixed; top:0; left:0; right:0; z-index:100; display:flex; justify-content:space-between; align-items:center; padding:1.4rem 5vw; background:rgba(237,246,249,0.82); backdrop-filter:blur(14px); border-bottom:1px solid rgba(106,168,214,0.15); }
+    nav { position:fixed; top:0; left:0; right:0; z-index:100; display:flex; justify-content:flex-end; align-items:center; padding:1.4rem 5vw; background:rgba(237,246,249,0.82); backdrop-filter:blur(14px); border-bottom:1px solid rgba(106,168,214,0.15); }
     .nav-logo { font-size:0.82rem; font-weight:600; letter-spacing:0.18em; text-transform:uppercase; color:var(--deep); text-decoration:none; }
     .nav-links { display:flex; gap:2.5rem; list-style:none; }
     .nav-links a { font-size:0.78rem; letter-spacing:0.14em; text-transform:uppercase; color:var(--mid); text-decoration:none; font-weight:500; transition:color 0.2s; }
@@ -28,16 +28,16 @@
     @keyframes orbFloat { 0%,100%{transform:translate(-15%,-52%) translateY(0)} 50%{transform:translate(-15%,-52%) translateY(-28px)} }
 
     .hero-top { position:absolute; top:0; left:0; right:0; display:flex; justify-content:space-between; align-items:flex-start; padding:5rem 6vw 0; z-index:2; }
-    .hero-top-name,.hero-top-label { font-size:0.82rem; letter-spacing:0.18em; font-weight:500; color:var(--deep); opacity:0; animation:fadeIn 0.8s 0.3s ease forwards; }
-    .hero-top-year { font-family:'DM Mono',monospace; font-size:0.78rem; letter-spacing:0.14em; color:var(--indigo); opacity:0; animation:fadeIn 0.8s 0.4s ease forwards; }
+    .hero-top-name,.hero-top-label { font-size:1rem; letter-spacing:0.18em; font-weight:500; color:var(--deep); opacity:0; animation:fadeIn 0.8s 0.3s ease forwards; }
+    .hero-top-year { font-family:'DM Mono',monospace; font-size:1rem; letter-spacing:0.14em; color:var(--indigo); opacity:0; animation:fadeIn 0.8s 0.4s ease forwards; }
 
     .hero-content { position:relative; z-index:2; display:flex; flex-direction:column; justify-content:flex-end; padding:0 6vw 2rem; }
     .hero-title-sm { font-size:clamp(2.1rem,4vw,3.3rem); font-weight:700; letter-spacing:0.14em; text-transform:uppercase; color:var(--deep); opacity:0; animation:slideInLeft 0.9s 0.5s cubic-bezier(0.22,1,0.36,1) forwards; }
-    .hero-title-lg { font-size:clamp(4.5rem,13vw,14rem); font-weight:900; letter-spacing:-0.02em; text-transform:uppercase; color:var(--deep); line-height:0.88; opacity:0; animation:slideInLeft 1s 0.65s cubic-bezier(0.22,1,0.36,1) forwards; }
+    .hero-title-lg { font-size:clamp(4.5rem,13vw,14rem); font-weight:700; letter-spacing:-0.02em; text-transform:uppercase; color:var(--deep); line-height:0.88; opacity:0; animation:slideInLeft 1s 0.65s cubic-bezier(0.22,1,0.36,1) forwards; }
     @keyframes slideInLeft { from{opacity:0;transform:translateX(-80px)} to{opacity:1;transform:translateX(0)} }
 
     .hero-bottom { position:relative; z-index:2; display:flex; justify-content:space-between; align-items:flex-end; padding:0 6vw 3rem; opacity:0; animation:fadeIn 1s 1s ease forwards; }
-    .hero-sub { font-size:0.9rem; color:var(--deep); opacity:0.6; max-width:260px; line-height:1.75; }
+    .hero-sub { font-size:1.15rem; color:var(--deep); opacity:0.6; max-width:340px; line-height:1.5; }
     .hero-actions { display:flex; gap:1rem; flex-wrap:wrap; align-items:center; }
     .hero-cta { display:inline-flex; align-items:center; gap:0.6rem; background:var(--deep); color:white; text-decoration:none; font-size:0.8rem; font-weight:600; letter-spacing:0.1em; text-transform:uppercase; padding:0.85rem 2rem; border-radius:100px; transition:background 0.25s,transform 0.2s; }
     .hero-cta:hover { background:var(--indigo); transform:translateY(-2px); }
@@ -116,7 +116,6 @@
 <body>
 
   <nav>
-    <a href="#" class="nav-logo">Lee Yeon Joo</a>
     <ul class="nav-links">
       <li><a href="#about">About</a></li>
       <li><a href="#skills">Skills</a></li>
