@@ -53,7 +53,7 @@
     .hero-cta-ghost { display:inline-flex; align-items:center; background:transparent; color:var(--deep); text-decoration:none; font-size:0.8rem; font-weight:500; letter-spacing:0.1em; text-transform:uppercase; padding:0.85rem 2rem; border-radius:100px; border:1.5px solid rgba(44,58,92,0.3); transition:border-color 0.25s,color 0.25s; }
     .hero-cta-ghost:hover { border-color:var(--indigo); color:var(--indigo); }
 
-    .hero-about-wrap { background:linear-gradient(160deg, #E8F5FA 0%, #DCF0F5 30%, #D0E8F2 60%, #C8E2EE 100%); }
+    .hero-about-wrap { background:linear-gradient(160deg, #E8F5FA 0%, #DCF0F5 30%, #D0E8F2 60%, #C8E2EE 100%); overflow:hidden; }
     @keyframes fadeUp { from{opacity:0;transform:translateY(30px)} to{opacity:1;transform:translateY(0)} }
     @keyframes fadeIn { from{opacity:0} to{opacity:1} }
 
@@ -62,7 +62,7 @@
     .section-title { font-weight:800; font-size:clamp(2rem,4vw,3.2rem); line-height:1.1; color:var(--deep); margin-bottom:3rem; letter-spacing:-0.02em; }
 
     /* About 섹션 */
-    #about { background:transparent; border-top:none; padding:0; position:relative; overflow:hidden; }
+    #about { background:transparent; border-top:none; padding:0; position:relative; overflow:visible; }
     .about-orb-bg { position:absolute; width:clamp(260px,36vw,480px); height:clamp(260px,36vw,480px); bottom:0; left:-8%; transform:translateY(30%); background:url('orb.png') center/contain no-repeat; opacity:0.75; mix-blend-mode:multiply; pointer-events:none; z-index:0; animation:orb1Float 9s ease-in-out infinite; }
     .about { position:relative; z-index:1; }
     .about { display:block; position:relative; }
