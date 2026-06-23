@@ -24,7 +24,7 @@
     .hero { min-height:100vh; display:grid; grid-template-rows:1fr auto; position:relative; overflow:hidden; background:transparent; }
     .orb1 { position:absolute; width:clamp(500px,72vw,1000px); height:clamp(500px,72vw,1000px); top:50%; left:50%; transform:translate(-15%,-52%); background:url('orb.png') center/contain no-repeat; animation:orb1Float 9s ease-in-out infinite; z-index:0; mix-blend-mode:multiply; }
     .orb2 { display:none; }
-    .orb-glow { position:absolute; width:clamp(800px,110vw,1500px); height:clamp(800px,110vw,1500px); top:50%; left:50%; transform:translate(-15%,-52%); background:radial-gradient(circle at 50% 50%, rgba(140,160,255,0.45) 0%, rgba(180,130,255,0.3) 25%, rgba(100,180,255,0.18) 50%, rgba(160,120,240,0.08) 68%, transparent 80%); border-radius:50%; filter:blur(40px); animation:glowPulse 6s ease-in-out infinite; z-index:0; pointer-events:none; }
+    .orb-glow { position:absolute; width:clamp(800px,110vw,1500px); height:clamp(800px,110vw,1500px); top:50%; left:50%; transform:translate(-15%,-52%); background:radial-gradient(circle at 50% 50%, rgba(180,220,245,0.5) 0%, rgba(160,210,240,0.3) 35%, rgba(140,195,230,0.12) 60%, transparent 80%); border-radius:50%; filter:blur(40px); animation:glowPulse 6s ease-in-out infinite; z-index:0; pointer-events:none; }
     .orb-ring { display:none; }
     @keyframes orb1Float {
       0%,100% { transform:translate(-15%,-52%) translateY(0) scale(1); }
@@ -53,7 +53,7 @@
     .hero-cta-ghost { display:inline-flex; align-items:center; background:transparent; color:var(--deep); text-decoration:none; font-size:0.8rem; font-weight:500; letter-spacing:0.1em; text-transform:uppercase; padding:0.85rem 2rem; border-radius:100px; border:1.5px solid rgba(44,58,92,0.3); transition:border-color 0.25s,color 0.25s; }
     .hero-cta-ghost:hover { border-color:var(--indigo); color:var(--indigo); }
 
-    .hero-about-wrap { background:linear-gradient(160deg, #EAF7FA 0%, #D6EFF5 50%, #C8E8F2 100%); }
+    .hero-about-wrap { background:linear-gradient(160deg, #E8F5FA 0%, #DCF0F5 30%, #D0E8F2 60%, #C8E2EE 100%); }
     @keyframes fadeUp { from{opacity:0;transform:translateY(30px)} to{opacity:1;transform:translateY(0)} }
     @keyframes fadeIn { from{opacity:0} to{opacity:1} }
 
@@ -69,10 +69,10 @@
     .about-avatar { width:100%; background:linear-gradient(160deg,#C8EDF0 0%,#B8CCEC 40%,#A8A8D8 75%,#C0B0E0 100%); display:flex; align-items:center; justify-content:center; font-size:6rem; font-weight:900; color:rgba(255,255,255,0.25); position:relative; overflow:hidden; }
     .about-avatar-orb { position:absolute; width:75%; height:75%; background:url('orb.png') center/contain no-repeat; top:50%; left:50%; transform:translate(-50%,-50%); opacity:0.85; mix-blend-mode:multiply; }
     .about-avatar-name { position:absolute; bottom:2.5rem; left:2.5rem; font-size:0.82rem; font-weight:500; letter-spacing:0.18em; color:rgba(255,255,255,0.85); text-transform:uppercase; }
-    .about-text { padding:6rem 6vw 6rem 38vw; display:flex; flex-direction:column; justify-content:center; background:transparent; min-height:80vh; }
+    .about-text { padding:2rem 6vw 4rem 38vw; display:flex; flex-direction:column; justify-content:center; background:transparent; }
 
     /* info 블록 */
-    .about-info { display:grid; grid-template-columns:1fr 1fr; gap:2.8rem 4rem; }
+    .about-info { display:grid; grid-template-columns:1fr 1fr; gap:1.6rem 4rem; }
     .about-info-item h5 { font-size:1.45rem; font-weight:700; color:var(--deep); letter-spacing:0.04em; padding-bottom:0.5rem; border-bottom:1.5px solid var(--deep); margin-bottom:0.8rem; display:inline-block; }
     .about-info-item p { font-size:1.15rem; color:var(--mid); line-height:1.7; }
     .career-list { display:flex; flex-direction:column; gap:0.45rem; }
@@ -188,7 +188,7 @@
             <h5>Education</h5>
             <p>서울여자대학교 경영학과 졸업</p>
           </div>
-          <div class="about-info-item">
+          <div class="about-info-item" style="grid-row:2/4;">
             <h5>Career</h5>
             <div class="career-list">
               <div class="career-row"><span>25.04 – 25.08</span><span>LG U+ 디지털 전환 가속화(구축&amp;운영)</span></div>
@@ -198,7 +198,7 @@
               <div class="career-row"><span>21.07 – 22.07</span><span>에버랜드(운영)</span></div>
             </div>
           </div>
-          <div class="about-info-item" style="grid-column:1/-1;">
+          <div class="about-info-item">
             <h5>Skills</h5>
             <div class="skill-icons">
               <div class="skill-icon-badge" style="background:#1a1a2e;"><img src="https://cdn.simpleicons.org/adobephotoshop/31A8FF" width="24" height="24" alt="Photoshop"/></div>
