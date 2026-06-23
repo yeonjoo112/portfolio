@@ -23,16 +23,17 @@
 
     .hero { min-height:100vh; display:grid; grid-template-rows:1fr auto; position:relative; overflow:hidden; background:linear-gradient(135deg, #D6F0F0 0%, #C8EAE8 35%, #C8C8E8 65%, #C4B8E0 85%, #D4C8EE 100%); }
     .orb1 { position:absolute; width:clamp(500px,72vw,1000px); height:clamp(500px,72vw,1000px); top:50%; left:50%; transform:translate(-15%,-52%); background:url('orb.png') center/contain no-repeat; animation:orb1Float 9s ease-in-out infinite; z-index:0; mix-blend-mode:multiply; }
-    .orb2 { position:absolute; width:clamp(160px,22vw,300px); height:clamp(160px,22vw,300px); bottom:8%; left:3%; background:url('orb.png') center/contain no-repeat; opacity:0.45; animation:orb2Float 12s ease-in-out infinite reverse; z-index:0; mix-blend-mode:multiply; }
+    .orb2 { display:none; }
+    .orb-glow { position:absolute; width:clamp(600px,88vw,1200px); height:clamp(600px,88vw,1200px); top:50%; left:50%; transform:translate(-15%,-52%); background:radial-gradient(circle at 50% 50%, rgba(160,180,255,0.28) 0%, rgba(180,140,240,0.15) 35%, rgba(100,160,240,0.08) 60%, transparent 75%); border-radius:50%; animation:glowPulse 6s ease-in-out infinite; z-index:0; pointer-events:none; }
     .orb-ring { display:none; }
     @keyframes orb1Float {
       0%,100% { transform:translate(-15%,-52%) translateY(0) scale(1); }
       40%     { transform:translate(-15%,-52%) translateY(-35px) scale(1.02); }
       70%     { transform:translate(-15%,-52%) translateY(-15px) scale(0.98); }
     }
-    @keyframes orb2Float {
-      0%,100% { transform:translateY(0) scale(1); }
-      50%     { transform:translateY(-28px) scale(1.06); }
+    @keyframes glowPulse {
+      0%,100% { transform:translate(-15%,-52%) scale(1);    opacity:0.8; }
+      50%     { transform:translate(-15%,-52%) scale(1.12); opacity:1;   }
     }
 
     .hero-top { position:absolute; top:0; left:0; right:0; display:flex; justify-content:space-between; align-items:flex-start; padding:5rem 6vw 0; z-index:2; }
@@ -133,6 +134,7 @@
   </nav>
 
   <section class="hero">
+    <div class="orb-glow"></div>
     <div class="orb1"></div>
     <div class="orb2"></div>
     <div class="orb-ring"></div>
