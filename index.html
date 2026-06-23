@@ -63,13 +63,14 @@
 
     /* About 섹션 */
     #about { background:transparent; border-top:none; padding:0; position:relative; overflow:visible; }
-    .about-orb-bg { position:absolute; width:clamp(260px,36vw,480px); height:clamp(260px,36vw,480px); bottom:0; left:-8%; transform:translateY(30%); background:url('orb.png') center/contain no-repeat; opacity:0.75; mix-blend-mode:multiply; pointer-events:none; z-index:0; animation:orb1Float 9s ease-in-out infinite; }
+    
     .about { position:relative; z-index:1; }
     .about { display:block; position:relative; }
     .about-avatar { width:100%; background:linear-gradient(160deg,#C8EDF0 0%,#B8CCEC 40%,#A8A8D8 75%,#C0B0E0 100%); display:flex; align-items:center; justify-content:center; font-size:6rem; font-weight:900; color:rgba(255,255,255,0.25); position:relative; overflow:hidden; }
     .about-avatar-orb { position:absolute; width:75%; height:75%; background:url('orb.png') center/contain no-repeat; top:50%; left:50%; transform:translate(-50%,-50%); opacity:0.85; mix-blend-mode:multiply; }
     .about-avatar-name { position:absolute; bottom:2.5rem; left:2.5rem; font-size:0.82rem; font-weight:500; letter-spacing:0.18em; color:rgba(255,255,255,0.85); text-transform:uppercase; }
-    .about-text { padding:2rem 6vw 3rem 38vw; display:flex; flex-direction:column; justify-content:center; background:transparent; }
+    .about-text { padding:2rem 6vw 3rem 38vw; display:flex; flex-direction:column; justify-content:center; background:transparent; position:relative; }
+    .about-orb-bg { position:absolute; width:clamp(260px,36vw,480px); height:clamp(260px,36vw,480px); bottom:-30%; left:-15%; background:url('orb.png') center/contain no-repeat; opacity:0.75; mix-blend-mode:multiply; pointer-events:none; z-index:0; animation:orb1Float 9s ease-in-out infinite; }
 
     /* info 블록 */
     .about-info { display:grid; grid-template-columns:1fr 1fr; gap:1.6rem 4rem; }
@@ -174,6 +175,7 @@
   <section id="about">
     <div class="about reveal">
       <div class="about-text">
+        <div class="about-orb-bg"></div>
         <div class="about-info">
           <div class="about-info-item">
             <h5>Name</h5>
@@ -209,7 +211,6 @@
         </div>
       </div>
     </div>
-    <div class="about-orb-bg"></div>
   </section>
   </div>
 
