@@ -70,7 +70,7 @@
     .about-avatar-orb { position:absolute; width:75%; height:75%; background:url('orb.png') center/contain no-repeat; top:50%; left:50%; transform:translate(-50%,-50%); opacity:0.85; mix-blend-mode:multiply; }
     .about-avatar-name { position:absolute; bottom:2.5rem; left:2.5rem; font-size:0.82rem; font-weight:500; letter-spacing:0.18em; color:rgba(255,255,255,0.85); text-transform:uppercase; }
     .about-text { padding:2rem 6vw 3rem 38vw; display:flex; flex-direction:column; justify-content:center; background:transparent; position:relative; }
-    .about-orb-bg { position:absolute; width:clamp(260px,36vw,480px); height:clamp(260px,36vw,480px); bottom:-30%; left:-15%; background:url('orb.png') center/contain no-repeat; opacity:0.75; mix-blend-mode:multiply; pointer-events:none; z-index:0; animation:orb1Float 9s ease-in-out infinite; }
+    .about-orb-bg { position:absolute; width:clamp(260px,36vw,480px); height:clamp(260px,36vw,480px); bottom:0; left:-15%; transform:translateY(45%); background:url('orb.png') center/contain no-repeat; opacity:0.75; mix-blend-mode:multiply; pointer-events:none; z-index:0; animation:orb1Float 9s ease-in-out infinite; }
 
     /* info 블록 */
     .about-info { display:grid; grid-template-columns:1fr 1fr; gap:1.6rem 4rem; }
