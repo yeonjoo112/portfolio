@@ -24,7 +24,7 @@
     .hero { min-height:100vh; display:grid; grid-template-rows:1fr auto; position:relative; overflow:hidden; background:linear-gradient(135deg, #D6F0F0 0%, #C8EAE8 35%, #C8C8E8 65%, #C4B8E0 85%, #D4C8EE 100%); }
     .orb1 { position:absolute; width:clamp(500px,72vw,1000px); height:clamp(500px,72vw,1000px); top:50%; left:50%; transform:translate(-15%,-52%); background:url('orb.png') center/contain no-repeat; animation:orb1Float 9s ease-in-out infinite; z-index:0; mix-blend-mode:multiply; }
     .orb2 { display:none; }
-    .orb-glow { position:absolute; width:clamp(600px,88vw,1200px); height:clamp(600px,88vw,1200px); top:50%; left:50%; transform:translate(-15%,-52%); background:radial-gradient(circle at 50% 50%, rgba(160,180,255,0.28) 0%, rgba(180,140,240,0.15) 35%, rgba(100,160,240,0.08) 60%, transparent 75%); border-radius:50%; animation:glowPulse 6s ease-in-out infinite; z-index:0; pointer-events:none; }
+    .orb-glow { position:absolute; width:clamp(800px,110vw,1500px); height:clamp(800px,110vw,1500px); top:50%; left:50%; transform:translate(-15%,-52%); background:radial-gradient(circle at 50% 50%, rgba(140,160,255,0.45) 0%, rgba(180,130,255,0.3) 25%, rgba(100,180,255,0.18) 50%, rgba(160,120,240,0.08) 68%, transparent 80%); border-radius:50%; filter:blur(40px); animation:glowPulse 6s ease-in-out infinite; z-index:0; pointer-events:none; }
     .orb-ring { display:none; }
     @keyframes orb1Float {
       0%,100% { transform:translate(-15%,-52%) translateY(0) scale(1); }
