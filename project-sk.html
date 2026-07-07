@@ -99,11 +99,11 @@
 
     .slide-track {
       display:flex;
-      width:100%; height:100%;
+      width:1200%; height:100%;
       transition:transform 0.5s cubic-bezier(0.4,0,0.2,1);
     }
 
-    .slide-track img { min-width:100%; height:100%; object-fit:cover; object-position:top; flex-shrink:0; }
+    .slide-track img { width:calc(100%/12); height:100%; object-fit:cover; object-position:top; flex-shrink:0; }
 
     .dots { display:flex; justify-content:center; gap:0.5rem; margin-top:1.5rem; }
     .dot { width:6px; height:6px; border-radius:50%; background:rgba(44,58,92,0.2); cursor:pointer; transition:background 0.2s, transform 0.2s; }
@@ -240,7 +240,7 @@
 
     function goTo(idx) {
       current = (idx + total) % total;
-      track.style.transform = `translateX(-${current * 100}%)`;
+      track.style.transform = `translateX(-${current * (100/12)}%)`;
       document.querySelectorAll('.dot').forEach((d, i) => d.classList.toggle('active', i === current));
       leftImg.src = `sk/image${((current - 1 + total) % total) + 1}.png`;
       rightImg.src = `sk/image${((current + 1) % total) + 1}.png`;
