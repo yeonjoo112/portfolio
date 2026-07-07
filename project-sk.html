@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>SK렌터카 스마트링크 · 이연주</title>
+  <link href="https://fonts.googleapis.com/css2?family=Pretendard:wght@300;400;500;600;700;800;900&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --deep:#2C3A5C; --mid:#6B7A99; --light:#A0AABB;
+      --bg:#EDF6F9; --white:#FFFFFF;
+      --blue:#6FA8D6; --indigo:#4A6FA5;
+    }
+    html { scroll-behavior: smooth; }
+    body { background:var(--bg); color:var(--deep); font-family:'Pretendard',sans-serif; line-height:1.6; overflow-x:hidden; }
+
+    /* NAV */
+    nav { position:fixed; top:0; left:0; right:0; z-index:100; display:flex; justify-content:space-between; align-items:center; padding:1.4rem 6vw; background:rgba(237,246,249,0.85); backdrop-filter:blur(14px); border-bottom:1px solid rgba(106,168,214,0.15); }
+    .nav-logo { font-size:0.82rem; font-weight:600; letter-spacing:0.18em; text-transform:uppercase; color:var(--deep); text-decoration:none; }
+    .nav-back { display:inline-flex; align-items:center; gap:0.5rem; font-size:0.8rem; font-weight:500; color:var(--mid); text-decoration:none; transition:color 0.2s; }
+    .nav-back:hover { color:var(--indigo); }
+
+    /* HERO */
+    .hero {
+      min-height:60vh;
+      background:linear-gradient(145deg, #B8CCE8 0%, #9898D0 50%, #C9B8D8 100%);
+      display:flex; flex-direction:column; justify-content:flex-end;
+      padding:8rem 6vw 4rem;
+      position:relative; overflow:hidden;
+    }
+    .hero-orb {
+      position:absolute; width:clamp(300px,50vw,700px); height:clamp(300px,50vw,700px);
+      top:50%; right:-5%; transform:translateY(-50%);
+      background:url('orb.png') center/contain no-repeat;
+      opacity:0.5; mix-blend-mode:multiply;
+      animation:float 10s ease-in-out infinite;
+    }
+    @keyframes float { 0%,100%{transform:translateY(-50%)} 50%{transform:translateY(-53%)} }
+    @keyframes fadeUp { from{opacity:0;transform:translateY(20px)} to{opacity:1;transform:translateY(0)} }
+
+    .hero-label { font-family:'DM Mono',monospace; font-size:0.75rem; letter-spacing:0.2em; text-transform:uppercase; color:rgba(255,255,255,0.7); margin-bottom:1rem; opacity:0; animation:fadeUp 0.8s 0.2s ease forwards; }
+    .hero-title { font-size:clamp(2.5rem,6vw,5rem); font-weight:900; line-height:1.05; letter-spacing:-0.02em; color:white; margin-bottom:1.5rem; opacity:0; animation:fadeUp 0.9s 0.4s ease forwards; }
+    .hero-meta { display:flex; gap:3rem; flex-wrap:wrap; opacity:0; animation:fadeUp 0.9s 0.6s ease forwards; }
+    .hero-meta-item span { display:block; font-family:'DM Mono',monospace; font-size:0.7rem; letter-spacing:0.14em; text-transform:uppercase; color:rgba(255,255,255,0.5); margin-bottom:0.3rem; }
+    .hero-meta-item p { font-size:0.95rem; font-weight:600; color:white; }
+
+    /* CONTENT */
+    .content { padding:6rem 6vw; }
+    .section { margin-bottom:6rem; }
+    .section-label { font-family:'DM Mono',monospace; font-size:0.72rem; letter-spacing:0.22em; text-transform:uppercase; color:var(--blue); margin-bottom:0.8rem; }
+    .section-title { font-size:clamp(1.6rem,3vw,2.2rem); font-weight:800; color:var(--deep); margin-bottom:1.5rem; letter-spacing:-0.02em; }
+    .section-text { font-size:1rem; color:var(--mid); line-height:1.9; max-width:680px; }
+    .divider { border:none; border-top:1px solid rgba(106,168,214,0.2); margin:4rem 0; }
+    .tags { display:flex; flex-wrap:wrap; gap:0.5rem; margin-top:1.5rem; }
+    .tag { padding:0.4rem 1rem; border-radius:100px; font-size:0.78rem; font-weight:500; border:1.5px solid rgba(106,168,214,0.35); color:var(--indigo); background:rgba(168,216,234,0.1); }
+
+    /* 폰 목업 슬라이더 */
+    .mockup-section {
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      gap:2rem;
+      padding:4rem 0;
+    }
+
+    .side-card {
+      width:clamp(220px,24vw,300px);
+      aspect-ratio:9/16;
+      border-radius:1.2rem;
+      overflow:hidden;
+      flex-shrink:0;
+      opacity:0.6;
+      transform:scale(0.92);
+      transition:opacity 0.3s;
+      box-shadow:0 12px 32px rgba(44,58,92,0.15);
+    }
+
+    .side-card img { width:100%; height:100%; object-fit:cover; }
+
+    .phone-mockup {
+      position:relative;
+      width:clamp(220px,24vw,300px);
+      flex-shrink:0;
+      z-index:2;
+      filter:drop-shadow(0 32px 64px rgba(44,58,92,0.35));
+    }
+
+    .phone-frame { width:100%; }
+
+    .phone-screen {
+      position:absolute;
+      top:4.5%; left:6.5%;
+      width:87%; height:91%;
+      border-radius:clamp(16px,3vw,28px);
+      overflow:hidden;
+      background:#000;
+    }
+
+    .slide-track {
+      display:flex;
+      width:100%; height:100%;
+      transition:transform 0.5s cubic-bezier(0.4,0,0.2,1);
+    }
+
+    .slide-track img { width:100%; height:100%; object-fit:cover; flex-shrink:0; }
+
+    .dots { display:flex; justify-content:center; gap:0.5rem; margin-top:1.5rem; }
+    .dot { width:6px; height:6px; border-radius:50%; background:rgba(44,58,92,0.2); cursor:pointer; transition:background 0.2s, transform 0.2s; }
+    .dot.active { background:var(--indigo); transform:scale(1.3); }
+
+    .slider-btns { display:flex; justify-content:center; gap:1rem; margin-top:1.2rem; }
+    .slider-btn { width:40px; height:40px; border-radius:50%; border:1.5px solid rgba(44,58,92,0.2); background:white; color:var(--deep); font-size:1rem; cursor:pointer; display:flex; align-items:center; justify-content:center; transition:background 0.2s, border-color 0.2s; }
+    .slider-btn:hover { background:var(--deep); color:white; border-color:var(--deep); }
+
+    /* 프로젝트 네비게이션 */
+    .project-nav { display:flex; justify-content:space-between; align-items:center; padding:3rem 0; border-top:1px solid rgba(106,168,214,0.2); margin-top:4rem; }
+    .project-nav a { display:inline-flex; align-items:center; gap:0.6rem; font-size:0.85rem; font-weight:600; color:var(--indigo); text-decoration:none; transition:gap 0.2s; }
+    .project-nav a:hover { gap:1rem; }
+
+    @media (max-width:768px) {
+      .mockup-section { gap:1.5rem; }
+      .phone-mockup.side { display:none; }
+      .hero-meta { gap:1.5rem; }
+    }
+  </style>
+</head>
+<body>
+
+  <nav>
+    <a href="index.html" class="nav-logo">YJ.</a>
+    <a href="index.html#projects" class="nav-back">← 목록으로</a>
+  </nav>
+
+  <!-- HERO -->
+  <section class="hero">
+    <div class="hero-orb"></div>
+    <p class="hero-label">Projects · 02</p>
+    <h1 class="hero-title">SK렌터카<br>스마트링크</h1>
+    <div class="hero-meta">
+      <div class="hero-meta-item"><span>기간</span><p>23.04 – 24.12</p></div>
+      <div class="hero-meta-item"><span>역할</span><p>UI/UX 디자인</p></div>
+      <div class="hero-meta-item"><span>기여도</span><p>100%</p></div>
+      <div class="hero-meta-item"><span>사용툴</span><p>XD · Photoshop · Illustrator · Figma</p></div>
+    </div>
+  </section>
+
+  <!-- CONTENT -->
+  <div class="content">
+
+    <!-- 개요 -->
+    <div class="section">
+      <p class="section-label">Overview</p>
+      <h2 class="section-title">프로젝트 개요</h2>
+      <p class="section-text">SK스마트링크 전체적 디자인 운영, APP고도화 작업 랜딩페이지, 브로셔 작업, 인스타, 뉴스레터, 블로그 작업 등 스마트링크 사업 전체의 운영 디자인을 담당했습니다.</p>
+      <p class="section-text" style="margin-top:1rem;">내용 : SIMS2/Smartlink 2.0 고도화, 제주신라 APP 챗봇 대화창 디자인화면 제작</p>
+      <div class="tags">
+        <span class="tag">Mobile App</span>
+        <span class="tag">Web Design</span>
+        <span class="tag">UI Design</span>
+        <span class="tag">APP 고도화</span>
+      </div>
+    </div>
+
+    <hr class="divider" />
+
+    <!-- 폰 목업 슬라이더 -->
+    <div class="section">
+      <p class="section-label">Work · 01</p>
+      <h2 class="section-title">모바일 작업물</h2>
+
+      <div class="mockup-section">
+
+        <!-- 왼쪽 네모 이미지 -->
+        <div class="side-card" id="leftCard">
+          <img src="sk/image12.png" alt="작업물" id="leftImg"/>
+        </div>
+
+        <!-- 가운데 폰 목업 -->
+        <div class="phone-mockup">
+          <svg class="phone-frame" viewBox="0 0 320 640" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <rect x="2" y="2" width="316" height="636" rx="44" fill="#1a1a1a" stroke="#444" stroke-width="4"/>
+            <rect x="10" y="10" width="300" height="620" rx="38" fill="#111"/>
+            <rect x="120" y="14" width="80" height="10" rx="5" fill="#333"/>
+            <circle cx="245" cy="19" r="5" fill="#333"/>
+          </svg>
+          <div class="phone-screen">
+            <div class="slide-track" id="slideTrack">
+              <img src="sk/image1.png" alt="작업물 01"/>
+              <img src="sk/image2.png" alt="작업물 02"/>
+              <img src="sk/image3.png" alt="작업물 03"/>
+              <img src="sk/image4.png" alt="작업물 04"/>
+              <img src="sk/image5.png" alt="작업물 05"/>
+              <img src="sk/image6.png" alt="작업물 06"/>
+              <img src="sk/image7.png" alt="작업물 07"/>
+              <img src="sk/image8.png" alt="작업물 08"/>
+              <img src="sk/image9.png" alt="작업물 09"/>
+              <img src="sk/image10.png" alt="작업물 10"/>
+              <img src="sk/image11.png" alt="작업물 11"/>
+              <img src="sk/image12.png" alt="작업물 12"/>
+            </div>
+          </div>
+          <div class="dots" id="dots"></div>
+          <div class="slider-btns">
+            <button class="slider-btn" id="prevBtn">←</button>
+            <button class="slider-btn" id="nextBtn">→</button>
+          </div>
+        </div>
+
+        <!-- 오른쪽 네모 이미지 -->
+        <div class="side-card" id="rightCard">
+          <img src="sk/image2.png" alt="작업물" id="rightImg"/>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- 프로젝트 네비게이션 -->
+    <div class="project-nav">
+      <a href="project-lgu.html">← 이전 프로젝트</a>
+      <a href="project-everland.html">다음 프로젝트 →</a>
+    </div>
+
+  </div>
+
+  <script>
+    const total = 12;
+    let current = 0;
+    const track = document.getElementById('slideTrack');
+    const dotsEl = document.getElementById('dots');
+    const leftImg = document.getElementById('leftImg');
+    const rightImg = document.getElementById('rightImg');
+
+    for (let i = 0; i < total; i++) {
+      const d = document.createElement('div');
+      d.className = 'dot' + (i === 0 ? ' active' : '');
+      d.addEventListener('click', () => goTo(i));
+      dotsEl.appendChild(d);
+    }
+
+    function goTo(idx) {
+      current = (idx + total) % total;
+      track.style.transform = `translateX(-${current * 100}%)`;
+      document.querySelectorAll('.dot').forEach((d, i) => d.classList.toggle('active', i === current));
+      leftImg.src = `sk/image${((current - 1 + total) % total) + 1}.png`;
+      rightImg.src = `sk/image${((current + 1) % total) + 1}.png`;
+    }
+
+    document.getElementById('prevBtn').addEventListener('click', () => goTo(current - 1));
+    document.getElementById('nextBtn').addEventListener('click', () => goTo(current + 1));
+    setInterval(() => goTo(current + 1), 3000);
+  </script>
+
+</body>
+</html>
