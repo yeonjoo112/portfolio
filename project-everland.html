@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>에버랜드 홈페이지 운영 · 이연주</title>
+  <link href="https://fonts.googleapis.com/css2?family=Pretendard:wght@300;400;500;600;700;800;900&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --deep:#2C3A5C; --mid:#6B7A99; --light:#A0AABB;
+      --bg:#EDF6F9; --white:#FFFFFF;
+      --blue:#6FA8D6; --indigo:#4A6FA5;
+    }
+    html { scroll-behavior: smooth; }
+    body { background:var(--bg); color:var(--deep); font-family:'Pretendard',sans-serif; line-height:1.6; overflow-x:hidden; }
+
+    /* NAV */
+    nav { position:fixed; top:0; left:0; right:0; z-index:100; display:flex; justify-content:space-between; align-items:center; padding:1.4rem 6vw; background:rgba(237,246,249,0.85); backdrop-filter:blur(14px); border-bottom:1px solid rgba(106,168,214,0.15); }
+    .nav-logo { font-size:0.82rem; font-weight:600; letter-spacing:0.18em; text-transform:uppercase; color:var(--deep); text-decoration:none; }
+    .nav-back { display:inline-flex; align-items:center; gap:0.5rem; font-size:0.8rem; font-weight:500; color:var(--mid); text-decoration:none; transition:color 0.2s; }
+    .nav-back:hover { color:var(--indigo); }
+
+    /* HERO */
+    .hero {
+      min-height:60vh;
+      background:linear-gradient(145deg, #D4C8F0 0%, #B8A8D8 50%, #C8D8F0 100%);
+      display:flex; flex-direction:column; justify-content:flex-end;
+      padding:8rem 6vw 4rem;
+      position:relative; overflow:hidden;
+    }
+    .hero-orb {
+      position:absolute; width:clamp(300px,50vw,700px); height:clamp(300px,50vw,700px);
+      top:50%; right:-5%; transform:translateY(-50%);
+      background:url('orb.png') center/contain no-repeat;
+      opacity:0.45; mix-blend-mode:multiply;
+      animation:float 10s ease-in-out infinite;
+    }
+    @keyframes float { 0%,100%{transform:translateY(-50%)} 50%{transform:translateY(-53%)} }
+    @keyframes fadeUp { from{opacity:0;transform:translateY(20px)} to{opacity:1;transform:translateY(0)} }
+
+    .hero-label { font-family:'DM Mono',monospace; font-size:0.75rem; letter-spacing:0.2em; text-transform:uppercase; color:rgba(255,255,255,0.7); margin-bottom:1rem; opacity:0; animation:fadeUp 0.8s 0.2s ease forwards; }
+    .hero-title { font-size:clamp(2.5rem,6vw,5rem); font-weight:900; line-height:1.05; letter-spacing:-0.02em; color:white; margin-bottom:1.5rem; opacity:0; animation:fadeUp 0.9s 0.4s ease forwards; }
+    .hero-meta { display:flex; gap:3rem; flex-wrap:wrap; opacity:0; animation:fadeUp 0.9s 0.6s ease forwards; }
+    .hero-meta-item span { display:block; font-family:'DM Mono',monospace; font-size:0.7rem; letter-spacing:0.14em; text-transform:uppercase; color:rgba(255,255,255,0.5); margin-bottom:0.3rem; }
+    .hero-meta-item p { font-size:0.95rem; font-weight:600; color:white; }
+
+    /* CONTENT */
+    .content { padding:6rem 6vw; }
+    .section { margin-bottom:6rem; }
+    .section-label { font-family:'DM Mono',monospace; font-size:0.72rem; letter-spacing:0.22em; text-transform:uppercase; color:var(--blue); margin-bottom:0.8rem; }
+    .section-title { font-size:clamp(1.6rem,3vw,2.2rem); font-weight:800; color:var(--deep); margin-bottom:1.5rem; letter-spacing:-0.02em; }
+    .section-text { font-size:1rem; color:var(--mid); line-height:1.9; max-width:680px; }
+    .divider { border:none; border-top:1px solid rgba(106,168,214,0.2); margin:4rem 0; }
+    .tags { display:flex; flex-wrap:wrap; gap:0.5rem; margin-top:1.5rem; }
+    .tag { padding:0.4rem 1rem; border-radius:100px; font-size:0.78rem; font-weight:500; border:1.5px solid rgba(106,168,214,0.35); color:var(--indigo); background:rgba(168,216,234,0.1); }
+
+    /* 이미지 섹션 */
+    .img-full {
+      width:100%;
+      border-radius:1.2rem;
+      overflow:hidden;
+      box-shadow:0 20px 60px rgba(44,58,92,0.12);
+    }
+    .img-full img {
+      width:100%;
+      height:auto;
+      display:block;
+    }
+
+    .img-label {
+      font-family:'DM Mono',monospace;
+      font-size:0.72rem;
+      letter-spacing:0.18em;
+      text-transform:uppercase;
+      color:var(--light);
+      margin-bottom:1rem;
+    }
+
+    /* 프로젝트 네비게이션 */
+    .project-nav { display:flex; justify-content:space-between; align-items:center; padding:3rem 0; border-top:1px solid rgba(106,168,214,0.2); margin-top:4rem; }
+    .project-nav a { display:inline-flex; align-items:center; gap:0.6rem; font-size:0.85rem; font-weight:600; color:var(--indigo); text-decoration:none; transition:gap 0.2s; }
+    .project-nav a:hover { gap:1rem; }
+
+    @media (max-width:768px) {
+      .hero-meta { gap:1.5rem; }
+      .work-grid { grid-template-columns:1fr !important; }
+    }
+  </style>
+</head>
+<body>
+
+  <nav>
+    <a href="index.html" class="nav-logo">YJ.</a>
+    <a href="index.html#projects" class="nav-back">← 목록으로</a>
+  </nav>
+
+  <!-- HERO -->
+  <section class="hero">
+    <div class="hero-orb"></div>
+    <p class="hero-label">Projects · 03</p>
+    <h1 class="hero-title">에버랜드<br>홈페이지 운영</h1>
+    <div class="hero-meta">
+      <div class="hero-meta-item"><span>기간</span><p>21.07 – 22.07</p></div>
+      <div class="hero-meta-item"><span>역할</span><p>UI/UX 디자인</p></div>
+      <div class="hero-meta-item"><span>기여도</span><p>100%</p></div>
+      <div class="hero-meta-item"><span>사용툴</span><p>Photoshop · Illustrator · XD</p></div>
+    </div>
+  </section>
+
+  <!-- CONTENT -->
+  <div class="content">
+
+    <!-- 개요 -->
+    <div class="section">
+      <p class="section-label">Overview</p>
+      <h2 class="section-title">프로젝트 개요</h2>
+      <p class="section-text">에버랜드 홈페이지 운영 디자인으로 전체적 이벤트 작업, 연간 축제 디자인 작업 (22년 장미축제 & 21년 겨울축제) 전체적으로 이벤트 운영 디자인에 집중</p>
+      <p class="section-text" style="margin-top:1rem;">내용 : 연간 축제 디자인 작업, 홈페이지 이벤트 디자인 작업 운영</p>
+      <div class="tags">
+        <span class="tag">Web Design</span>
+        <span class="tag">Event Design</span>
+        <span class="tag">Homepage</span>
+      </div>
+    </div>
+
+    <hr class="divider" />
+
+    <!-- Web + Mobile 작업물 나란히 -->
+    <div class="section">
+      <p class="section-label">Work</p>
+      <h2 class="section-title">작업물</h2>
+      <div style="display:grid; grid-template-columns:2fr 1fr; gap:2rem; align-items:start;">
+        <div>
+          <p class="img-label">Web · Desktop</p>
+          <div class="img-full">
+            <img src="everland/web.jpg" alt="에버랜드 웹 작업물" />
+          </div>
+        </div>
+        <div>
+          <p class="img-label">Mobile</p>
+          <div class="img-full">
+            <img src="everland/mobile.jpg" alt="에버랜드 모바일 작업물" />
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 프로젝트 네비게이션 -->
+    <div class="project-nav">
+      <a href="project-sk.html">← 이전 프로젝트</a>
+      <a href="index.html#projects">목록으로 →</a>
+    </div>
+
+  </div>
+
+</body>
+</html>
