@@ -122,10 +122,14 @@
     .project-nav a { display:inline-flex; align-items:center; gap:0.6rem; font-size:0.85rem; font-weight:600; color:var(--indigo); text-decoration:none; transition:gap 0.2s; }
     .project-nav a:hover { gap:1rem; }
 
+    .pc-slider-wrap { display:flex; align-items:center; gap:1.5rem; }
+    .pc-center { flex:2; border-radius:1.2rem; overflow:hidden; box-shadow:0 24px 60px rgba(44,58,92,0.2); transition:all 0.3s; }
+    .pc-center img { width:100%; height:auto; display:block; }
+    .pc-side { flex:1; border-radius:1rem; overflow:hidden; opacity:0.5; transform:scale(0.93); box-shadow:0 12px 30px rgba(44,58,92,0.1); transition:all 0.3s; }
+    .pc-side img { width:100%; height:auto; display:block; }
+
     @media (max-width:768px) {
-      .mockup-section { gap:1.5rem; }
-      .phone-mockup.side { display:none; }
-      .hero-meta { gap:1.5rem; }
+      .pc-side { display:none; }
     }
   </style>
 </head>
@@ -171,7 +175,13 @@
     <!-- 폰 목업 슬라이더 -->
     <div class="section">
       <p class="section-label">Work · 01</p>
-      <h2 class="section-title">모바일 작업물</h2>
+      <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:1.5rem;">
+        <h2 class="section-title" style="margin-bottom:0;">모바일 작업물</h2>
+        <div style="display:flex; gap:0.8rem;">
+          <button class="slider-btn" id="prevBtn">←</button>
+          <button class="slider-btn" id="nextBtn">→</button>
+        </div>
+      </div>
 
       <div class="mockup-section">
 
@@ -199,10 +209,6 @@
             </div>
           </div>
           <div class="dots" id="dots"></div>
-          <div class="slider-btns">
-            <button class="slider-btn" id="prevBtn">←</button>
-            <button class="slider-btn" id="nextBtn">→</button>
-          </div>
         </div>
 
         <!-- 오른쪽 네모 이미지 -->
@@ -211,6 +217,28 @@
         </div>
 
       </div>
+    </div>
+
+    <hr class="divider" />
+
+    <!-- PC 작업물 (같은 위치에서 전환) -->
+    <div class="section" id="pcSection" style="display:none;">
+      <p class="section-label">Work · 02</p>
+      <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:1.5rem;">
+        <h2 class="section-title" style="margin-bottom:0;">PC 작업물</h2>
+        <div style="display:flex; gap:0.8rem;">
+          <button class="slider-btn" id="pcPrev">←</button>
+          <button class="slider-btn" id="pcNext">→</button>
+        </div>
+      </div>
+
+      <div class="pc-slider-wrap">
+        <div class="pc-side"><img id="pcLeftImg" src="sk/pc8.jpg" alt=""/></div>
+        <div class="pc-center"><img id="pcCenterImg" src="sk/pc1.jpg" alt=""/></div>
+        <div class="pc-side"><img id="pcRightImg" src="sk/pc2.jpg" alt=""/></div>
+      </div>
+
+      <div class="dots" id="pcDots" style="margin-top:1rem;"></div>
     </div>
 
     <!-- 프로젝트 네비게이션 -->
@@ -222,6 +250,7 @@
   </div>
 
   <script>
+    // 모바일 슬라이더
     const total = 12;
     let current = 0;
     const track = document.getElementById('slideTrack');
@@ -239,14 +268,59 @@
     function goTo(idx) {
       current = (idx + total) % total;
       track.style.transform = `translateX(-${current * (100/12)}%)`;
-      document.querySelectorAll('.dot').forEach((d, i) => d.classList.toggle('active', i === current));
+      document.querySelectorAll('#dots .dot').forEach((d, i) => d.classList.toggle('active', i === current));
       leftImg.src = `sk/image${((current - 1 + total) % total) + 1}.png`;
       rightImg.src = `sk/image${((current + 1) % total) + 1}.png`;
     }
 
-    document.getElementById('prevBtn').addEventListener('click', () => goTo(current - 1));
-    document.getElementById('nextBtn').addEventListener('click', () => goTo(current + 1));
+    const mobileSection = document.querySelector('.section:has(#slideTrack)') || document.getElementById('mobileSection');
+    const pcSection = document.getElementById('pcSection');
+
+    function showPC() {
+      document.querySelector('.mockup-section').closest('.section').style.display = 'none';
+      pcSection.style.display = 'block';
+    }
+
+    function showMobile() {
+      document.querySelector('.mockup-section').closest('.section').style.display = 'block';
+      pcSection.style.display = 'none';
+    }
+
+    document.getElementById('prevBtn').addEventListener('click', () => {
+      if (current === 0) { showPC(); }
+      else { goTo(current - 1); }
+    });
+    document.getElementById('nextBtn').addEventListener('click', () => {
+      if (current === total - 1) { showPC(); }
+      else { goTo(current + 1); }
+    });
     setInterval(() => goTo(current + 1), 3000);
+
+    // PC 슬라이더
+    const pcTotal = 8;
+    let pcCurrent = 0;
+    const pcDotsEl = document.getElementById('pcDots');
+    const pcCenterImg = document.getElementById('pcCenterImg');
+    const pcLeftImg = document.getElementById('pcLeftImg');
+    const pcRightImg = document.getElementById('pcRightImg');
+
+    for (let i = 0; i < pcTotal; i++) {
+      const d = document.createElement('div');
+      d.className = 'dot' + (i === 0 ? ' active' : '');
+      d.addEventListener('click', () => pcGoTo(i));
+      pcDotsEl.appendChild(d);
+    }
+
+    function pcGoTo(idx) {
+      pcCurrent = (idx + pcTotal) % pcTotal;
+      pcCenterImg.src = `sk/pc${pcCurrent + 1}.jpg`;
+      pcLeftImg.src = `sk/pc${((pcCurrent - 1 + pcTotal) % pcTotal) + 1}.jpg`;
+      pcRightImg.src = `sk/pc${((pcCurrent + 1) % pcTotal) + 1}.jpg`;
+      document.querySelectorAll('#pcDots .dot').forEach((d, i) => d.classList.toggle('active', i === pcCurrent));
+    }
+
+    document.getElementById('pcPrev').addEventListener('click', () => pcGoTo(pcCurrent - 1));
+    document.getElementById('pcNext').addEventListener('click', () => pcGoTo(pcCurrent + 1));
   </script>
 
 </body>
