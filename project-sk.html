@@ -173,7 +173,7 @@
     <hr class="divider" />
 
     <!-- 폰 목업 슬라이더 -->
-    <div class="section">
+    <div class="section" id="mobileSection">
       <p class="section-label">Work · 01</p>
       <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:1.5rem;">
         <h2 class="section-title" style="margin-bottom:0;">모바일 작업물</h2>
@@ -222,7 +222,10 @@
     <hr class="divider" />
 
     <!-- PC 작업물 (같은 위치에서 전환) -->
-    <div class="section" id="pcSection" style="display:none;">
+    <hr class="divider" />
+
+    <!-- PC 작업물 -->
+    <div class="section" id="pcSection" style="display:block;">
       <p class="section-label">Work · 02</p>
       <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:1.5rem;">
         <h2 class="section-title" style="margin-bottom:0;">PC 작업물</h2>
@@ -232,10 +235,13 @@
         </div>
       </div>
 
-      <div class="pc-slider-wrap">
-        <div class="pc-side"><img id="pcLeftImg" src="sk/pc8.jpg" alt=""/></div>
-        <div class="pc-center"><img id="pcCenterImg" src="sk/pc1.jpg" alt=""/></div>
-        <div class="pc-side"><img id="pcRightImg" src="sk/pc2.jpg" alt=""/></div>
+      <div style="display:grid; grid-template-columns:1fr 1fr; gap:2rem; align-items:start;">
+        <div style="border-radius:1.2rem; overflow:hidden; box-shadow:0 20px 60px rgba(44,58,92,0.12);">
+          <img id="pcCenterImg" src="sk/pc1.jpg" alt="" style="width:100%;height:auto;display:block;"/>
+        </div>
+        <div style="border-radius:1.2rem; overflow:hidden; box-shadow:0 12px 32px rgba(44,58,92,0.08); opacity:0.7;">
+          <img id="pcRightImg" src="sk/pc2.jpg" alt="" style="width:100%;height:auto;display:block;"/>
+        </div>
       </div>
 
       <div class="dots" id="pcDots" style="margin-top:1rem;"></div>
@@ -273,27 +279,21 @@
       rightImg.src = `sk/image${((current + 1) % total) + 1}.png`;
     }
 
-    const mobileSection = document.querySelector('.section:has(#slideTrack)') || document.getElementById('mobileSection');
+    const mobileSection = document.getElementById('mobileSection');
     const pcSection = document.getElementById('pcSection');
 
     function showPC() {
-      document.querySelector('.mockup-section').closest('.section').style.display = 'none';
+      mobileSection.style.display = 'none';
       pcSection.style.display = 'block';
     }
 
     function showMobile() {
-      document.querySelector('.mockup-section').closest('.section').style.display = 'block';
+      mobileSection.style.display = 'block';
       pcSection.style.display = 'none';
     }
 
-    document.getElementById('prevBtn').addEventListener('click', () => {
-      if (current === 0) { showPC(); }
-      else { goTo(current - 1); }
-    });
-    document.getElementById('nextBtn').addEventListener('click', () => {
-      if (current === total - 1) { showPC(); }
-      else { goTo(current + 1); }
-    });
+    document.getElementById('prevBtn').addEventListener('click', () => goTo(current - 1));
+    document.getElementById('nextBtn').addEventListener('click', () => showPC());
     setInterval(() => goTo(current + 1), 3000);
 
     // PC 슬라이더
@@ -301,7 +301,6 @@
     let pcCurrent = 0;
     const pcDotsEl = document.getElementById('pcDots');
     const pcCenterImg = document.getElementById('pcCenterImg');
-    const pcLeftImg = document.getElementById('pcLeftImg');
     const pcRightImg = document.getElementById('pcRightImg');
 
     for (let i = 0; i < pcTotal; i++) {
@@ -313,13 +312,13 @@
 
     function pcGoTo(idx) {
       pcCurrent = (idx + pcTotal) % pcTotal;
+      const next = (pcCurrent + 1) % pcTotal;
       pcCenterImg.src = `sk/pc${pcCurrent + 1}.jpg`;
-      pcLeftImg.src = `sk/pc${((pcCurrent - 1 + pcTotal) % pcTotal) + 1}.jpg`;
-      pcRightImg.src = `sk/pc${((pcCurrent + 1) % pcTotal) + 1}.jpg`;
+      pcRightImg.src = `sk/pc${next + 1}.jpg`;
       document.querySelectorAll('#pcDots .dot').forEach((d, i) => d.classList.toggle('active', i === pcCurrent));
     }
 
-    document.getElementById('pcPrev').addEventListener('click', () => pcGoTo(pcCurrent - 1));
+    document.getElementById('pcPrev').addEventListener('click', () => showMobile());
     document.getElementById('pcNext').addEventListener('click', () => pcGoTo(pcCurrent + 1));
   </script>
 
